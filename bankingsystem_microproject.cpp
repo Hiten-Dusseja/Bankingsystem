@@ -268,6 +268,7 @@ void Bank::deposit()
 
 
 
+
 int getaccno(Bank a[],int i)
 {   int k=0,j,accntno,ch=0;
 
