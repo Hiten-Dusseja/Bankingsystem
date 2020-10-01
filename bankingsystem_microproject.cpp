@@ -108,6 +108,7 @@ class Bank
   void deposit();
   void withdraw();
   bool eligible(float n);
+  void deleteacc();
   friend void transfer(Bank &a,Bank &b);
 };
 
@@ -359,6 +360,18 @@ cout << "Please enter login password:";
         return 0;
 }
 
+//Delete an account
+void Bank::deleteacc()
+{
+
+    ofstream myfile("bankfile.txt",ios::app);
+    myfile<<"---Deleted an account---"<<endl;
+    myfile<<accno<<" Account was deleted by the account holder"<<endl;
+    myfile.close();
+    accno=0;
+    cout<<"Account deleted successfully!"<<endl;
+
+}
 
 int main()
 {
@@ -377,8 +390,8 @@ int main()
       //cout<<".Display your account"<<endl;
       cout<<"6.Display all the accounts' details"<<endl;
       cout<<"7.Transfer money to an account"<<endl;
-     // cout<<"9.Delete a account"<<endl;
-      cout<<"8.Exit(all accounts will be closed if you exit"<<endl;
+      cout<<"8.Delete an account"<<endl;
+      cout<<"9.Exit(all accounts will be closed if you exit"<<endl;
       cout<<"Enter your choice: ";
       cin>>ch;
       switch(ch)
@@ -415,9 +428,15 @@ int main()
              { int c;
              cout<<endl<<"Displaying all the details...."<<endl;
              for(c=0;c<i;c++)
-             {
-              user[c].display();
-              cout<<endl;
+             {  if(user[c].accno==0)
+                {
+                  continue;
+                }
+                 else
+                    {
+                    user[c].display();
+                     cout<<endl;
+                    }
              }
             }
             else
@@ -445,13 +464,13 @@ int main()
 
 
 
-      /*   case 8:
+          case 8:
          n1=getaccno(user,i);
-         user[n1];
-         break;*/
+         user[n1].deleteacc();
+         break;
 
 
-         case 8:
+         case 9:
          exit(0);
          break;
 
